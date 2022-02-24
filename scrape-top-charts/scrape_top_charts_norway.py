@@ -42,4 +42,4 @@ def create_dataset() -> pandas.DataFrame:
 
 if __name__ == "__main__":
     df = create_dataset()
-    df.to_csv("data/charts_radio_norway_2017_2021.csv", index=False)
+    df.to_csv("data/charts/charts_radio_norway_2017_2021.csv", index=False)

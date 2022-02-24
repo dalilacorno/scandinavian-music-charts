@@ -79,4 +79,10 @@ def create_dataset() -> pandas.DataFrame:
 
 if __name__ == "__main__":
     df = create_dataset()
-    df.to_csv("data/charts_spotify_allcountries_2017_2021.csv", index=False)
+    # Some songs are on the Spotify top charts, but have been removed from
+    # Spotify. Their name and/or title will be null.
+    df = df.dropna()
+    # There is a trailing last week of 2016 due to how Spotify handles the string
+    # of the week in the website URL
+    df = df[df.year > 2016]
+    df.to_csv("data/charts/charts_spotify_allcountries_2017_2021.csv", index=False)
