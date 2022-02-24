@@ -8,10 +8,10 @@ from lyricsgenius import Genius
 from pycountry import languages
 from requests.exceptions import Timeout
 
-FILENAMES = [filename for filename in os.listdir("data")]
+FILENAMES = [os.path.join("data/top10", filename) for filename in os.listdir("data/top10")]
 
 # Need to provide a Genius access token for this to work
-# GENIUS = Genius(..., timeout=20, retries=3)
+# GENIUS = Genius(..., timeout=20, retries=5, sleep_time=1)
 GENIUS = None
 
 
@@ -42,6 +42,6 @@ if __name__ == "__main__":
     for filename in FILENAMES:
         df = pandas.read_csv(filename)
         df["language"] = df.apply(lambda df: detect_song_language(df.artist, df.title), axis=1)
-        df.to_csv(filename, index=False)
+        df.to_csv(os.path.join("data/labelled-automated", os.path.basename(filename)), index=False)
 
     print(detect_song_language.cache_info())
