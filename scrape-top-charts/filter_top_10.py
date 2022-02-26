@@ -44,6 +44,7 @@ def save_filtered_radio_charts() -> None:
     dfs_top10 = filter_radio_charts()
     final = pandas.concat(dfs_top10.values())
     final.sort_values(by=["year", "country", "weekcount"], ascending=[True, True, False], inplace=True)
+    final = final.reindex(sorted(final.columns), axis=1)  # Order columns alphabetically
     final.to_csv("data/top10/radio_charts.csv", index=False)
 
 
@@ -68,6 +69,7 @@ def save_filtered_spotify_charts() -> None:
     """Save filtered Spotify charts to disk."""
     final = filter_spotify_charts()
     final.sort_values(by=["year", "country", "streams"], ascending=[True, True, False], inplace=True)
+    final = final.reindex(sorted(final.columns), axis=1)  # Order columns alphabetically
     final.to_csv("data/top10/spotify_charts.csv", index=False)
 
 

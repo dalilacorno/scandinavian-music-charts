@@ -42,4 +42,5 @@ def create_dataset() -> pandas.DataFrame:
 
 if __name__ == "__main__":
     df = create_dataset()
+    df = df.reindex(sorted(df.columns), axis=1)  # Order columns alphabetically
     df.to_csv("data/charts/charts_radio_norway_2017_2021.csv", index=False)

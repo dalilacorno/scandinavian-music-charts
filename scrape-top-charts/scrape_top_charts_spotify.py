@@ -85,4 +85,5 @@ if __name__ == "__main__":
     # There is a trailing last week of 2016 due to how Spotify handles the string
     # of the week in the website URL
     df = df[df.year > 2016]
+    df = df.reindex(sorted(df.columns), axis=1)  # Order columns alphabetically
     df.to_csv("data/charts/charts_spotify_allcountries_2017_2021.csv", index=False)

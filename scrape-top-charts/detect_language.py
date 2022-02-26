@@ -42,6 +42,7 @@ if __name__ == "__main__":
     for filename in FILENAMES:
         df = pandas.read_csv(filename)
         df["language"] = df.apply(lambda df: detect_song_language(df.artist, df.title), axis=1)
+        df = df.reindex(sorted(df.columns), axis=1)  # Order columns alphabetically
         df.to_csv(os.path.join("data/labelled-automated", os.path.basename(filename)), index=False)
 
     print(detect_song_language.cache_info())
