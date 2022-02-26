@@ -100,4 +100,5 @@ def save_specific_year(url: str) -> None:
 
 if __name__ == "__main__":
     df = create_dataset()
+    df = df.reindex(sorted(df.columns), axis=1)  # Order columns alphabetically
     df.to_csv("data/eurovision_songs_official.csv", index=False)
